@@ -11,16 +11,16 @@
 %global swscale_soversion 5
 
 Summary:        A complete solution to record, convert and stream audio and video
-Name:           ffmpeg
+Name:           ffmpeg4
 Version:        4.4.1
-Release:        7%{?dist}
+Release:        8%{?dist}
 License:        LGPLv3+
 URL:            http://%{name}.org/
 Epoch:          1
 
-Source0:        http://%{name}.org/releases/%{name}-%{version}.tar.xz
+Source0:        http://ffmpeg.org/releases/ffmpeg-%{version}.tar.xz
 
-Patch0:         https://aur.archlinux.org/cgit/aur.git/plain/015-ffmpeg-cuda11-fix.patch?h=ffmpeg-full#/%{name}-cuda11.patch
+Patch0:         %{name}-cuda11.patch
 # https://github.com/OpenVisualCloud/SVT-VP9/tree/master/ffmpeg_plugin
 Patch1:         %{name}-svt-vp9.patch
 # https://github.com/OpenVisualCloud/SVT-HEVC/tree/master/ffmpeg_plugin
@@ -170,7 +170,7 @@ This package contains the libraries for %{name}.
 %package        devel
 Summary:        Development package for %{name}
 Requires:       %{name}-libs%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavdevice%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavdevice58%{?_isa} = %{?epoch}:%{version}-%{release}
 Requires:       pkgconfig
 
 %description    devel
@@ -178,177 +178,177 @@ FFmpeg is a complete and free Internet live audio and video broadcasting
 solution for Linux/Unix. It also includes a digital VCR. It can encode in real
 time in many formats. This package contains development files for %{name}.
 
-%package     -n libavcodec
+%package     -n libavcodec58
 Summary:        FFmpeg codec library
 
-%description -n libavcodec
+%description -n libavcodec58
 The libavcodec library provides a generic encoding/decoding framework and
 contains multiple decoders and encoders for audio, video and subtitle streams,
 and several bitstream filters.
 
-%package     -n libavcodec-devel
+%package     -n libavcodec58-devel
 Summary:        Development files for FFmpeg's codec library
-Requires:       libavcodec%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavutil-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavcodec58%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavutil56-devel%{?_isa} = %{?epoch}:%{version}-%{release}
 Requires:       pkgconfig
 
-%description -n libavcodec-devel
+%description -n libavcodec58-devel
 The libavcodec library provides a generic encoding/decoding framework and
 contains multiple decoders and encoders for audio, video and subtitle streams,
 and several bitstream filters.
  
 This subpackage contains the headers for FFmpeg libavcodec.
 
-%package     -n libavdevice
+%package     -n libavdevice58
 Summary:        FFMpeg devices muxing/demuxing library
 
-%description -n libavdevice
+%description -n libavdevice58
 Libavdevice is a complementary library to libavf "libavformat". It provides
 various "special" platform-specific muxers and demuxers, e.g. for grabbing
 devices, audio capture and playback etc.
 
-%package     -n libavdevice-devel
+%package     -n libavdevice58-devel
 Summary:        Development files for FFMpeg devices muxing/demuxing library
-Requires:       libavcodec-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavdevice%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavfilter-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavformat-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavutil-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavcodec58-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavdevice58%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavfilter7-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavformat58-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavutil56-devel%{?_isa} = %{?epoch}:%{version}-%{release}
 Requires:       pkgconfig
 
-%description -n libavdevice-devel
+%description -n libavdevice58-devel
 This subpackage contains the headers for FFmpeg libavdevice.
 
-%package     -n libavfilter
+%package     -n libavfilter7
 Summary:        FFmpeg audio and video filtering library
-Requires:       libavcodec%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavformat%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavutil%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libpostproc%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libswresample%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libswscale%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavcodec58%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavformat58%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavutil56%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libpostproc55%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libswresample3%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libswscale5%{?_isa} = %{?epoch}:%{version}-%{release}
 
-%description -n libavfilter
+%description -n libavfilter7
 The libavfilter library provides a generic audio/video filtering framework
 containing several filters, sources and sinks.
 
-%package     -n libavfilter-devel
+%package     -n libavfilter7-devel
 Summary:        Development files for FFmpeg's audio/video filter library
-Requires:       libavcodec-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavfilter%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavformat-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavutil-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libpostproc-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libswresample-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libswscale-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavcodec58-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavfilter7%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavformat58-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavutil56-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libpostproc55-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libswresample3-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libswscale5-devel%{?_isa} = %{?epoch}:%{version}-%{release}
 Requires:       pkgconfig
 
-%description -n libavfilter-devel
+%description -n libavfilter7-devel
 This subpackage contains the headers for FFmpeg libavfilter.
 
-%package     -n libavformat
+%package     -n libavformat58
 Summary:        FFmpeg's stream format library
 
-%description -n libavformat
+%description -n libavformat58
 The libavformat library provides a generic framework for multiplexing and
 demultiplexing (muxing and demuxing) audio, video and subtitle streams.
 It encompasses multiple muxers and demuxers for multimedia container formats.
 
-%package     -n libavformat-devel
+%package     -n libavformat58-devel
 Summary:        Development files for FFmpeg's stream format library
-Requires:       libavcodec-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavformat%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavutil-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libswresample-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavcodec58-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavformat58%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavutil56-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libswresample3-devel%{?_isa} = %{?epoch}:%{version}-%{release}
 Requires:       pkgconfig
 
-%description -n libavformat-devel
+%description -n libavformat58-devel
 This subpackage contains the headers for FFmpeg libavformat.
 
-%package     -n libavresample
+%package     -n libavresample4
 Summary:        FFmpeg's stream format library
 
-%description -n libavresample
+%description -n libavresample4
 Libavresample (lavr) is a library that handles audio resampling, sample format
 conversion and mixing.
 
-%package     -n libavresample-devel
+%package     -n libavresample4-devel
 Summary:        Development files for FFmpeg's stream format library
-Requires:       libavresample%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavutil-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavresample4%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavutil56-devel%{?_isa} = %{?epoch}:%{version}-%{release}
 Requires:       pkgconfig
 
-%description -n libavresample-devel
+%description -n libavresample4-devel
 This subpackage contains the headers for FFmpeg libavresample.
 
-%package     -n libavutil
+%package     -n libavutil56
 Summary:        FFmpeg's utility library
 
-%description -n libavutil
+%description -n libavutil56
 The libavutil library is a utility library to aid portable multimedia
 programming. It contains safe portable string functions, random
 number generators, data structures, additional mathematics functions,
 cryptography and multimedia related functionality (like enumerations
 for pixel and sample formats).
 
-%package     -n libavutil-devel
+%package     -n libavutil56-devel
 Summary:        Development files for FFmpeg's utility library
-Requires:       libavutil%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavutil56%{?_isa} = %{?epoch}:%{version}-%{release}
 Requires:       pkgconfig
 
-%description -n libavutil-devel
+%description -n libavutil56-devel
 This subpackage contains the headers for FFmpeg libavutil.
 
-%package     -n libpostproc
+%package     -n libpostproc55
 Summary:        FFmpeg post-processing library
 
-%description -n libpostproc
+%description -n libpostproc55
 A library with video postprocessing filters, such as deblocking and
 deringing filters, noise reduction, automatic contrast and brightness
 correction, linear/cubic interpolating deinterlacing.
 
-%package     -n libpostproc-devel
+%package     -n libpostproc55-devel
 Summary:        Development files for the FFmpeg post-processing library
-Requires:       libavutil-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libpostproc%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavutil56-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libpostproc55%{?_isa} = %{?epoch}:%{version}-%{release}
 Requires:       pkgconfig
 
-%description -n libpostproc-devel
+%description -n libpostproc55-devel
 This subpackage contains the headers for FFmpeg libpostproc.
 
-%package     -n libswresample
+%package     -n libswresample3
 Summary:        FFmpeg software resampling library
-Requires:       libavutil%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavutil56%{?_isa} = %{?epoch}:%{version}-%{release}
 
-%description -n libswresample
+%description -n libswresample3
 The libswresample library performs audio conversion between different
 sample rates, channel layout and channel formats.
 
-%package     -n libswresample-devel
+%package     -n libswresample3-devel
 Summary:        Development files for the FFmpeg software resampling library
-Requires:       libavutil-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libswresample%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavutil56-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libswresample3%{?_isa} = %{?epoch}:%{version}-%{release}
 
-%description -n libswresample-devel
+%description -n libswresample3-devel
 This subpackage contains the headers for FFmpeg libswresample.
 
-%package     -n libswscale
+%package     -n libswscale5
 Summary:        FFmpeg image scaling and colorspace/pixel conversion library
 
-%description -n libswscale
+%description -n libswscale5
 The libswscale library performs image scaling and colorspace and
 pixel format conversion operations.
 
-%package     -n libswscale-devel
+%package     -n libswscale5-devel
 Summary:        Development files for FFmpeg's image scaling and colorspace library
-Requires:       libavutil-devel%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libswscale%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libavutil56-devel%{?_isa} = %{?epoch}:%{version}-%{release}
+Requires:       libswscale5%{?_isa} = %{?epoch}:%{version}-%{release}
 
-%description -n libswscale-devel
+%description -n libswscale5-devel
 This subpackage contains the headers for FFmpeg libswscale.
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n ffmpeg-%{version}
 
 # Uncomment to enable debugging while configuring
 #sed -i -e 's|#!/bin/sh|#!/bin/sh -x|g' configure
@@ -519,15 +519,15 @@ rm -fr %{buildroot}%{_datadir}/examples
 mkdir doc/html
 mv doc/*.html doc/html
 
-%ldconfig_scriptlets -n libavcodec
-%ldconfig_scriptlets -n libavdevice
-%ldconfig_scriptlets -n libavfilter
-%ldconfig_scriptlets -n libavformat
-%ldconfig_scriptlets -n libavresample
-%ldconfig_scriptlets -n libavutil
-%ldconfig_scriptlets -n libpostproc
-%ldconfig_scriptlets -n libswresample
-%ldconfig_scriptlets -n libswscale
+%ldconfig_scriptlets -n libavcodec58
+%ldconfig_scriptlets -n libavdevice58
+%ldconfig_scriptlets -n libavfilter7
+%ldconfig_scriptlets -n libavformat58
+%ldconfig_scriptlets -n libavresample4
+%ldconfig_scriptlets -n libavutil56
+%ldconfig_scriptlets -n libpostproc55
+%ldconfig_scriptlets -n libswresample3
+%ldconfig_scriptlets -n libswscale5
 
 %files
 %{_bindir}/%{name}
@@ -546,95 +546,98 @@ mv doc/*.html doc/html
 %doc doc/APIchanges doc/*.txt
 %doc doc/html doc/examples
 
-%files -n libavcodec
+%files -n libavcodec58
 %license COPYING.GPLv2 LICENSE.md
 %{_libdir}/libavcodec.so.%{avcodec_soversion}*
 
-%files -n libavcodec-devel
+%files -n libavcodec58-devel
 %{_includedir}/libavcodec
 %{_libdir}/pkgconfig/libavcodec.pc
 %{_libdir}/libavcodec.so
 %{_mandir}/man3/libavcodec.3*
 
-%files -n libavdevice
+%files -n libavdevice58
 %license COPYING.GPLv2 LICENSE.md
 %{_libdir}/libavdevice.so.%{avdevice_soversion}*
 
-%files -n libavdevice-devel
+%files -n libavdevice58-devel
 %{_includedir}/libavdevice
 %{_libdir}/pkgconfig/libavdevice.pc
 %{_libdir}/libavdevice.so
 %{_mandir}/man3/libavdevice.3*
 
-%files -n libavfilter
+%files -n libavfilter7
 %license COPYING.GPLv2 LICENSE.md
 %{_libdir}/libavfilter.so.%{avfilter_soversion}*
 
-%files -n libavfilter-devel
+%files -n libavfilter7-devel
 %{_includedir}/libavfilter
 %{_libdir}/pkgconfig/libavfilter.pc
 %{_libdir}/libavfilter.so
 %{_mandir}/man3/libavfilter.3*
 
-%files -n libavformat
+%files -n libavformat58
 %license COPYING.GPLv2 LICENSE.md
 %{_libdir}/libavformat.so.%{avformat_soversion}*
 
-%files -n libavformat-devel
+%files -n libavformat58-devel
 %{_includedir}/libavformat
 %{_libdir}/pkgconfig/libavformat.pc
 %{_libdir}/libavformat.so
 %{_mandir}/man3/libavformat.3*
 
-%files -n libavutil
+%files -n libavutil56
 %license COPYING.GPLv2 LICENSE.md
 %{_libdir}/libavutil.so.%{avutil_soversion}*
 
-%files -n libavutil-devel
+%files -n libavutil56-devel
 %{_includedir}/libavutil
 %{_libdir}/pkgconfig/libavutil.pc
 %{_libdir}/libavutil.so
 %{_mandir}/man3/libavutil.3*
 
-%files -n libavresample
+%files -n libavresample4
 %license COPYING.GPLv2 LICENSE.md
 %{_libdir}/libavresample.so.%{avresample_soversion}*
 
-%files -n libavresample-devel
+%files -n libavresample4-devel
 %{_includedir}/libavresample
 %{_libdir}/pkgconfig/libavresample.pc
 %{_libdir}/libavresample.so
 
-%files -n libpostproc
+%files -n libpostproc55
 %license COPYING.GPLv2 LICENSE.md
 %{_libdir}/libpostproc.so.%{postproc_soversion}*
 
-%files -n libpostproc-devel
+%files -n libpostproc55-devel
 %{_includedir}/libpostproc
 %{_libdir}/pkgconfig/libpostproc.pc
 %{_libdir}/libpostproc.so
 
-%files -n libswresample
+%files -n libswresample3
 %license COPYING.GPLv2 LICENSE.md
 %{_libdir}/libswresample.so.%{swresample_soversion}*
 
-%files -n libswresample-devel
+%files -n libswresample3-devel
 %{_includedir}/libswresample
 %{_libdir}/pkgconfig/libswresample.pc
 %{_libdir}/libswresample.so
 %{_mandir}/man3/libswresample.3*
 
-%files -n libswscale
+%files -n libswscale5
 %license COPYING.GPLv2 LICENSE.md
 %{_libdir}/libswscale.so.%{swscale_soversion}*
 
-%files -n libswscale-devel
+%files -n libswscale5-devel
 %{_includedir}/libswscale
 %{_libdir}/pkgconfig/libswscale.pc
 %{_libdir}/libswscale.so
 %{_mandir}/man3/libswscale.3*
 
 %changelog
+* Sun Apr 10 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.1-8
+- Create ffmpeg4 compatibility package.
+
 * Thu Mar 17 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.1-7
 - Split libraries in subpackages like in Fedora 36.
 
