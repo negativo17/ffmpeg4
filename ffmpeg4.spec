@@ -157,27 +157,6 @@ broadcasting solution for Linux/Unix. It also includes a digital
 VCR. It can encode in real time in many formats including MPEG1 audio
 and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.
 
-%package        libs
-Summary:        Libraries for %{name}
-
-%description    libs
-FFmpeg is a complete and free Internet live audio and video
-broadcasting solution for Linux/Unix. It also includes a digital
-VCR. It can encode in real time in many formats including MPEG1 audio
-and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.
-This package contains the libraries for %{name}.
-
-%package        devel
-Summary:        Development package for %{name}
-Requires:       %{name}-libs%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       libavdevice58%{?_isa} = %{?epoch}:%{version}-%{release}
-Requires:       pkgconfig
-
-%description    devel
-FFmpeg is a complete and free Internet live audio and video broadcasting
-solution for Linux/Unix. It also includes a digital VCR. It can encode in real
-time in many formats. This package contains development files for %{name}.
-
 %package     -n libavcodec58
 Summary:        FFmpeg codec library
 
@@ -359,6 +338,7 @@ This subpackage contains the headers for FFmpeg libswscale.
     --bindir=%{_bindir} \
     --datadir=%{_datadir}/%{name} \
     --disable-debug \
+    --disable-programs \
     --disable-static \
     --disable-stripping \
     --enable-amf \
@@ -457,7 +437,6 @@ This subpackage contains the headers for FFmpeg libswscale.
     --enable-zlib \
     --incdir=%{_includedir} \
     --libdir=%{_libdir} \
-    --mandir=%{_mandir} \
     --optflags="%{optflags}" \
     --prefix=%{_prefix} \
     --shlibdir=%{_libdir} \
@@ -508,16 +487,12 @@ This subpackage contains the headers for FFmpeg libswscale.
 %endif
 
 %make_build
-make documentation
-make alltools
 
 %install
 %make_install
 # Let rpmbuild pick up the docs
 rm -fr %{buildroot}%{_docdir}/*
-rm -fr %{buildroot}%{_datadir}/examples
-mkdir doc/html
-mv doc/*.html doc/html
+rm -fr %{buildroot}%{_datadir}/%{name}/examples
 
 %ldconfig_scriptlets -n libavcodec58
 %ldconfig_scriptlets -n libavdevice58
@@ -529,75 +504,53 @@ mv doc/*.html doc/html
 %ldconfig_scriptlets -n libswresample3
 %ldconfig_scriptlets -n libswscale5
 
-%files
-%{_bindir}/%{name}
-%{_bindir}/ffplay
-%{_bindir}/ffprobe
-%{_mandir}/man1/%{name}*.1*
-%{_mandir}/man1/ffplay*.1*
-%{_mandir}/man1/ffprobe*.1*
-%{_datadir}/%{name}
-
-%files libs
-%license COPYING.* LICENSE.md
-%doc MAINTAINERS README.md CREDITS Changelog RELEASE_NOTES
-
-%files devel
-%doc doc/APIchanges doc/*.txt
-%doc doc/html doc/examples
-
 %files -n libavcodec58
-%license COPYING.GPLv2 LICENSE.md
+%license COPYING.* LICENSE.md
 %{_libdir}/libavcodec.so.%{avcodec_soversion}*
 
 %files -n libavcodec58-devel
 %{_includedir}/libavcodec
 %{_libdir}/pkgconfig/libavcodec.pc
 %{_libdir}/libavcodec.so
-%{_mandir}/man3/libavcodec.3*
 
 %files -n libavdevice58
-%license COPYING.GPLv2 LICENSE.md
+%license COPYING.* LICENSE.md
 %{_libdir}/libavdevice.so.%{avdevice_soversion}*
 
 %files -n libavdevice58-devel
 %{_includedir}/libavdevice
 %{_libdir}/pkgconfig/libavdevice.pc
 %{_libdir}/libavdevice.so
-%{_mandir}/man3/libavdevice.3*
 
 %files -n libavfilter7
-%license COPYING.GPLv2 LICENSE.md
+%license COPYING.* LICENSE.md
 %{_libdir}/libavfilter.so.%{avfilter_soversion}*
 
 %files -n libavfilter7-devel
 %{_includedir}/libavfilter
 %{_libdir}/pkgconfig/libavfilter.pc
 %{_libdir}/libavfilter.so
-%{_mandir}/man3/libavfilter.3*
 
 %files -n libavformat58
-%license COPYING.GPLv2 LICENSE.md
+%license COPYING.* LICENSE.md
 %{_libdir}/libavformat.so.%{avformat_soversion}*
 
 %files -n libavformat58-devel
 %{_includedir}/libavformat
 %{_libdir}/pkgconfig/libavformat.pc
 %{_libdir}/libavformat.so
-%{_mandir}/man3/libavformat.3*
 
 %files -n libavutil56
-%license COPYING.GPLv2 LICENSE.md
+%license COPYING.* LICENSE.md
 %{_libdir}/libavutil.so.%{avutil_soversion}*
 
 %files -n libavutil56-devel
 %{_includedir}/libavutil
 %{_libdir}/pkgconfig/libavutil.pc
 %{_libdir}/libavutil.so
-%{_mandir}/man3/libavutil.3*
 
 %files -n libavresample4
-%license COPYING.GPLv2 LICENSE.md
+%license COPYING.* LICENSE.md
 %{_libdir}/libavresample.so.%{avresample_soversion}*
 
 %files -n libavresample4-devel
@@ -606,7 +559,7 @@ mv doc/*.html doc/html
 %{_libdir}/libavresample.so
 
 %files -n libpostproc55
-%license COPYING.GPLv2 LICENSE.md
+%license COPYING.* LICENSE.md
 %{_libdir}/libpostproc.so.%{postproc_soversion}*
 
 %files -n libpostproc55-devel
@@ -615,24 +568,22 @@ mv doc/*.html doc/html
 %{_libdir}/libpostproc.so
 
 %files -n libswresample3
-%license COPYING.GPLv2 LICENSE.md
+%license COPYING.* LICENSE.md
 %{_libdir}/libswresample.so.%{swresample_soversion}*
 
 %files -n libswresample3-devel
 %{_includedir}/libswresample
 %{_libdir}/pkgconfig/libswresample.pc
 %{_libdir}/libswresample.so
-%{_mandir}/man3/libswresample.3*
 
 %files -n libswscale5
-%license COPYING.GPLv2 LICENSE.md
+%license COPYING.* LICENSE.md
 %{_libdir}/libswscale.so.%{swscale_soversion}*
 
 %files -n libswscale5-devel
 %{_includedir}/libswscale
 %{_libdir}/pkgconfig/libswscale.pc
 %{_libdir}/libswscale.so
-%{_mandir}/man3/libswscale.3*
 
 %changelog
 * Sun Apr 10 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.1-8
