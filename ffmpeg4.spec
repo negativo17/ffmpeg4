@@ -12,8 +12,8 @@
 
 Summary:        A complete solution to record, convert and stream audio and video
 Name:           ffmpeg4
-Version:        4.4.1
-Release:        8%{?dist}
+Version:        4.4.2
+Release:        1%{?dist}
 License:        LGPLv3+
 URL:            http://%{name}.org/
 Epoch:          1
@@ -586,6 +586,9 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %{_libdir}/libswscale.so
 
 %changelog
+* Sun Apr 17 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.2-1
+- Update to 4.4.2.
+
 * Sun Apr 10 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.1-8
 - Create ffmpeg4 compatibility package.
 
