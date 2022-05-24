@@ -13,7 +13,7 @@
 Summary:        A complete solution to record, convert and stream audio and video
 Name:           ffmpeg4
 Version:        4.4.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        LGPLv3+
 URL:            http://%{name}.org/
 Epoch:          1
@@ -55,7 +55,6 @@ BuildRequires:  libxcb-devel >= 1.4
 BuildRequires:  libxml2-devel
 BuildRequires:  libX11-devel
 BuildRequires:  libXv-devel
-BuildRequires:  libXvMC-devel
 BuildRequires:  mesa-libGL-devel
 BuildRequires:  nasm
 BuildRequires:  ocl-icd-devel
@@ -586,6 +585,9 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %{_libdir}/libswscale.so
 
 %changelog
+* Tue May 24 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.2-2
+- Drop XVideo Motion Compensation support.
+
 * Sun Apr 17 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.2-1
 - Update to 4.4.2.
 
