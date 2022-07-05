@@ -13,7 +13,7 @@
 Summary:        A complete solution to record, convert and stream audio and video
 Name:           ffmpeg4
 Version:        4.4.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        LGPLv3+
 URL:            http://%{name}.org/
 Epoch:          1
@@ -34,7 +34,6 @@ BuildRequires:  codec2-devel
 BuildRequires:  decklink-devel >= 11.5
 BuildRequires:  doxygen
 BuildRequires:  freetype-devel
-BuildRequires:  frei0r-devel
 BuildRequires:  gsm-devel
 BuildRequires:  ilbc-devel
 BuildRequires:  lame-devel >= 3.98.3
@@ -135,6 +134,11 @@ BuildRequires:  pkgconfig(libzmq) >= 4.2.1
 BuildRequires:  pkgconfig(srt) >= 1.3.0
 BuildRequires:  pkgconfig(vapoursynth-script) >= 42
 BuildRequires:  pkgconfig(vulkan) >= 1.1.97
+%endif
+
+%if 0%{?fedora} || 0%{?rhel} == 7   || 0%{?rhel} == 8
+BuildRequires:  frei0r-devel
+BuildRequires:  pkgconfig(opencv)
 %endif
 
 %ifarch x86_64
@@ -350,7 +354,6 @@ This subpackage contains the headers for FFmpeg libswscale.
     --enable-bzlib \
     --enable-chromaprint \
     --enable-decklink \
-    --enable-frei0r \
     --enable-gcrypt \
     --enable-gmp \
     --enable-gpl \
@@ -451,6 +454,10 @@ This subpackage contains the headers for FFmpeg libswscale.
     --enable-v4l2-m2m \
     --enable-vapoursynth \
     --enable-vulkan \
+%endif
+%if 0%{?fedora} || 0%{?rhel} == 7 || 0%{?rhel} == 8
+    --enable-frei0r \
+    --enable-libopencv \
 %endif
 %ifarch x86_64
     --enable-cuda \
@@ -585,6 +592,10 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %{_libdir}/libswscale.so
 
 %changelog
+* Tue Jul 05 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.2-4
+- Disable frei0r on CentOS/RHEL 9.
+- Enable OpenCV on Fedora and CentOS/RHEL 7 and 8.
+
 * Wed Jun 01 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.2-3
 - Rebuild for updated dependencies.
 
