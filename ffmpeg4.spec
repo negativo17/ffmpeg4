@@ -138,7 +138,6 @@ BuildRequires:  pkgconfig(vulkan) >= 1.1.97
 
 %if 0%{?fedora} || 0%{?rhel} == 7   || 0%{?rhel} == 8
 BuildRequires:  frei0r-devel
-BuildRequires:  pkgconfig(opencv)
 %endif
 
 %ifarch x86_64
@@ -457,7 +456,6 @@ This subpackage contains the headers for FFmpeg libswscale.
 %endif
 %if 0%{?fedora} || 0%{?rhel} == 7 || 0%{?rhel} == 8
     --enable-frei0r \
-    --enable-libopencv \
 %endif
 %ifarch x86_64
     --enable-cuda \
@@ -594,6 +592,7 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %changelog
 * Thu Sep 22 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.2-5
 - Rebuild for updated dependencies.
+- Drop OpenCV support everywhere.
 
 * Tue Jul 05 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.2-4
 - Disable frei0r on CentOS/RHEL 9.
