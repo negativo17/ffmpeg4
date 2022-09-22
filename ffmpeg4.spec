@@ -13,7 +13,7 @@
 Summary:        A complete solution to record, convert and stream audio and video
 Name:           ffmpeg4
 Version:        4.4.2
-Release:        4%{?dist}
+Release:        5%{?dist}
 License:        LGPLv3+
 URL:            http://%{name}.org/
 Epoch:          1
@@ -592,6 +592,9 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %{_libdir}/libswscale.so
 
 %changelog
+* Thu Sep 22 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.2-5
+- Rebuild for updated dependencies.
+
 * Tue Jul 05 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.2-4
 - Disable frei0r on CentOS/RHEL 9.
 - Enable OpenCV on Fedora and CentOS/RHEL 7 and 8.
