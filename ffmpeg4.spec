@@ -27,6 +27,9 @@ Patch1:         %{name}-svt-vp9.patch
 Patch2:         %{name}-svt-hevc.patch
 # https://framagit.org/tytan652/ffmpeg-ndi-patch
 Patch3:         %{name}-ndi.patch
+# https://git.ffmpeg.org/gitweb/ffmpeg.git/commit/e5163b1d34381a3319214a902ef1df923dd2eeba
+# https://git.ffmpeg.org/gitweb/ffmpeg.git/commit/c6fdbe26ef30fff817581e5ed6e078d96111248a
+Patch4:         %{name}-sdl2.patch
 
 BuildRequires:  AMF-devel
 BuildRequires:  bzip2-devel
