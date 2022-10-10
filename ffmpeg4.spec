@@ -12,8 +12,8 @@
 
 Summary:        A complete solution to record, convert and stream audio and video
 Name:           ffmpeg4
-Version:        4.4.2
-Release:        5%{?dist}
+Version:        4.4.3
+Release:        1%{?dist}
 License:        LGPLv3+
 URL:            http://%{name}.org/
 Epoch:          1
@@ -27,9 +27,6 @@ Patch1:         %{name}-svt-vp9.patch
 Patch2:         %{name}-svt-hevc.patch
 # https://framagit.org/tytan652/ffmpeg-ndi-patch
 Patch3:         %{name}-ndi.patch
-# https://git.ffmpeg.org/gitweb/ffmpeg.git/commit/e5163b1d34381a3319214a902ef1df923dd2eeba
-# https://git.ffmpeg.org/gitweb/ffmpeg.git/commit/c6fdbe26ef30fff817581e5ed6e078d96111248a
-Patch4:         %{name}-sdl2.patch
 
 BuildRequires:  AMF-devel
 BuildRequires:  bzip2-devel
@@ -593,6 +590,9 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %{_libdir}/libswscale.so
 
 %changelog
+* Sun Nov 20 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.3-1
+- Update to 4.4.3.
+
 * Thu Sep 22 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.2-5
 - Rebuild for updated dependencies.
 - Drop OpenCV support everywhere.
