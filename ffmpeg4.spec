@@ -13,7 +13,7 @@
 Summary:        A complete solution to record, convert and stream audio and video
 Name:           ffmpeg4
 Version:        4.4.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        LGPLv3+
 URL:            http://%{name}.org/
 Epoch:          1
@@ -34,6 +34,7 @@ BuildRequires:  codec2-devel
 BuildRequires:  decklink-devel >= 11.5
 BuildRequires:  doxygen
 BuildRequires:  freetype-devel
+BuildRequires:  gmp-devel
 BuildRequires:  gsm-devel
 BuildRequires:  ilbc-devel
 BuildRequires:  lame-devel >= 3.98.3
@@ -91,7 +92,6 @@ BuildRequires:  pkgconfig(libopenjp2) >= 2.1.0
 BuildRequires:  pkgconfig(libopenmpt) >= 0.2.6557
 BuildRequires:  pkgconfig(libpulse)
 BuildRequires:  pkgconfig(librabbitmq) >= 0.7.1
-BuildRequires:  pkgconfig(librtmp)
 BuildRequires:  pkgconfig(libssh)
 BuildRequires:  pkgconfig(libtcmalloc)
 BuildRequires:  pkgconfig(libva) >= 0.35.0
@@ -392,7 +392,6 @@ This subpackage contains the headers for FFmpeg libswscale.
     --enable-libpulse \
     --enable-librabbitmq \
     --enable-librsvg \
-    --enable-librtmp \
     --enable-librubberband \
     --enable-libsmbclient \
     --enable-libsnappy \
@@ -590,6 +589,9 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %{_libdir}/libswscale.so
 
 %changelog
+* Fri Dec 23 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.3-3
+- Drop librtmp support, use native rtmp.
+
 * Thu Dec 15 2022 Simone Caronni <negativo17@gmail.com> - 1:4.4.3-2
 - Rebuild for updated dependencies.
 
