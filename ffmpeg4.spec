@@ -13,7 +13,7 @@
 Summary:        A complete solution to record, convert and stream audio and video
 Name:           ffmpeg4
 Version:        4.4.3
-Release:        6%{?dist}
+Release:        7%{?dist}
 License:        LGPLv3+
 URL:            http://%{name}.org/
 Epoch:          1
@@ -589,6 +589,9 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %{_libdir}/libswscale.so
 
 %changelog
+* Fri Jun 02 2023 Simone Caronni <negativo17@gmail.com> - 1:4.4.3-7
+- Rebuild for updated dependencies.
+
 * Sat Mar 11 2023 Simone Caronni <negativo17@gmail.com> - 1:4.4.3-6
 - Rebuild for updated depdendencies.
 
