@@ -13,7 +13,7 @@
 Summary:        A complete solution to record, convert and stream audio and video
 Name:           ffmpeg4
 Version:        4.4.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        LGPLv3+
 URL:            http://%{name}.org/
 Epoch:          1
@@ -125,7 +125,9 @@ BuildRequires:  pkgconfig(zlib)
 BuildRequires:  glslang-devel
 BuildRequires:  pkgconfig(lilv-0)
 BuildRequires:  pkgconfig(lv2)
+%if 0%{?fedora} < 39
 BuildRequires:  pkgconfig(pocketsphinx)
+%endif
 BuildRequires:  pkgconfig(rav1e) >= 0.4.0
 %endif
 
@@ -444,7 +446,9 @@ This subpackage contains the headers for FFmpeg libswscale.
     --enable-libglslang \
     --enable-librav1e \
     --enable-lv2 \
+%if 0%{?fedora} < 39
     --enable-pocketsphinx \
+%endif
 %endif
 %if 0%{?fedora} || 0%{?rhel} >= 8
     --enable-libsrt \
@@ -589,6 +593,9 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %{_libdir}/libswscale.so
 
 %changelog
+* Tue Oct 03 2023 Simone Caronni <negativo17@gmail.com> - 1:4.4.4-2
+- Momentarily disable pocketsphinx support for Fedora 39+.
+
 * Tue Jun 13 2023 Simone Caronni <negativo17@gmail.com> - 1:4.4.4-1
 - Update to 4.4.4.
 
