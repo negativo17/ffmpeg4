@@ -1,6 +1,7 @@
---- a/configure
-+++ b/configure
-@@ -4352,10 +4352,10 @@ fi
+diff -Naur ffmpeg-4.4.4.old/configure ffmpeg-4.4.4/configure
+--- ffmpeg-4.4.4.old/configure	2023-10-03 09:22:47.478114192 +0200
++++ ffmpeg-4.4.4/configure	2023-10-03 09:22:47.795119902 +0200
+@@ -4352,10 +4352,10 @@
  
  if enabled cuda_nvcc; then
      nvcc_default="nvcc"
