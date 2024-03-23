@@ -13,7 +13,7 @@
 Summary:        A complete solution to record, convert and stream audio and video
 Name:           ffmpeg4
 Version:        4.4.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        LGPLv3+
 URL:            http://%{name}.org/
 Epoch:          1
@@ -142,12 +142,15 @@ BuildRequires:  pkgconfig(vulkan) >= 1.1.97
 BuildRequires:  frei0r-devel
 %endif
 
-%ifarch x86_64
+%ifarch x86_64 aarch64
 # Nvidia CUVID support and Performance Primitives based code
 BuildRequires:  cuda-cudart-devel
 BuildRequires:  cuda-nvcc
 BuildRequires:  libnpp-devel
 BuildRequires:  pkgconfig(ffnvcodec) >= 8.1.24.2
+%endif
+
+%ifarch x86_64
 BuildRequires:  pkgconfig(libmfx)
 BuildRequires:  pkgconfig(libvmaf) >= 1.5.2
 BuildRequires:  pkgconfig(SvtAv1Enc)
@@ -460,21 +463,22 @@ This subpackage contains the headers for FFmpeg libswscale.
 %if 0%{?fedora} || 0%{?rhel} == 7 || 0%{?rhel} == 8
     --enable-frei0r \
 %endif
-%ifarch x86_64
+%ifarch x86_64 aarch64
     --enable-cuda \
     --enable-cuda-nvcc \
     --enable-cuvid \
     --enable-ffnvcodec \
-    --enable-libmfx \
     --enable-libnpp \
-    --enable-libsvtav1 \
-    --enable-libsvthevc \
-    --enable-libsvtvp9 \
-    --enable-libvmaf \
     --enable-nvdec \
     --enable-nvenc \
     --extra-cflags="-I%{_includedir}/cuda" \
     --cpu=%{_target_cpu} \
+%endif
+%ifarch x86_64
+    --enable-libsvtav1 \
+    --enable-libsvthevc \
+    --enable-libsvtvp9 \
+    --enable-libvmaf \
 %endif
 %ifarch ppc
     --cpu=g3 \
@@ -593,6 +597,9 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %{_libdir}/libswscale.so
 
 %changelog
+* Sat Mar 23 2024 Simone Caronni <negativo17@gmail.com> - 1:4.4.4-3
+- Enable Nvidia CUDA, performance primitives, encoding/decoding also on aarch64.
+
 * Tue Oct 03 2023 Simone Caronni <negativo17@gmail.com> - 1:4.4.4-2
 - Momentarily disable pocketsphinx support for Fedora 39+.
 
