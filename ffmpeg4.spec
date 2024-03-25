@@ -472,7 +472,6 @@ This subpackage contains the headers for FFmpeg libswscale.
     --enable-nvdec \
     --enable-nvenc \
     --extra-cflags="-I%{_includedir}/cuda" \
-    --cpu=%{_target_cpu} \
 %endif
 %ifarch x86_64
     --enable-libsvtav1 \
