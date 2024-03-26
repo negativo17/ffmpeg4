@@ -10,10 +10,25 @@
 %global swresample_soversion 3
 %global swscale_soversion 5
 
+# NVCC + Glibc 2.38 (f39+) on aarch64 currently broken:
+%ifarch x86_64
+%bcond_without cuda
+%else
+%bcond_with cuda
+%endif
+
+%ifarch aarch64
+%if 0%{?fedora} == 38 || 0%{?rhel} >= 7
+%bcond_without cuda
+%else
+%bcond_with cuda
+%endif
+%endif
+
 Summary:        A complete solution to record, convert and stream audio and video
 Name:           ffmpeg4
 Version:        4.4.4
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        LGPLv3+
 URL:            http://%{name}.org/
 Epoch:          1
@@ -464,8 +479,9 @@ This subpackage contains the headers for FFmpeg libswscale.
     --enable-frei0r \
 %endif
 %ifarch x86_64 aarch64
-    --enable-cuda \
+%if %{with cuda}
     --enable-cuda-nvcc \
+%endif
     --enable-cuvid \
     --enable-ffnvcodec \
     --enable-libnpp \
@@ -596,6 +612,9 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %{_libdir}/libswscale.so
 
 %changelog
+* Tue Mar 26 2024 Simone Caronni <negativo17@gmail.com> - 1:4.4.4-4
+- NVCC + Glibc 2.38 on ARM is currently broken.
+
 * Sat Mar 23 2024 Simone Caronni <negativo17@gmail.com> - 1:4.4.4-3
 - Enable Nvidia CUDA, performance primitives, encoding/decoding also on aarch64.
 
