@@ -137,7 +137,6 @@ BuildRequires:  pkgconfig(zimg) >= 2.7.0
 BuildRequires:  pkgconfig(zlib)
 
 %if 0%{?fedora}
-BuildRequires:  glslang-devel
 BuildRequires:  pkgconfig(lilv-0)
 BuildRequires:  pkgconfig(lv2)
 %if 0%{?fedora} < 39
@@ -461,7 +460,6 @@ This subpackage contains the headers for FFmpeg libswscale.
     --prefix=%{_prefix} \
     --shlibdir=%{_libdir} \
 %if 0%{?fedora}
-    --enable-libglslang \
     --enable-librav1e \
     --enable-lv2 \
 %if 0%{?fedora} < 39
@@ -614,6 +612,7 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %changelog
 * Tue Mar 26 2024 Simone Caronni <negativo17@gmail.com> - 1:4.4.4-4
 - NVCC + Glibc 2.38 on ARM is currently broken.
+- Disable glslang.
 
 * Sat Mar 23 2024 Simone Caronni <negativo17@gmail.com> - 1:4.4.4-3
 - Enable Nvidia CUDA, performance primitives, encoding/decoding also on aarch64.
