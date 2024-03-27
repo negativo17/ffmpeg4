@@ -28,7 +28,7 @@
 Summary:        A complete solution to record, convert and stream audio and video
 Name:           ffmpeg4
 Version:        4.4.4
-Release:        4%{?dist}
+Release:        5%{?dist}
 License:        LGPLv3+
 URL:            http://%{name}.org/
 Epoch:          1
@@ -42,6 +42,9 @@ Patch1:         %{name}-svt-vp9.patch
 Patch2:         %{name}-svt-hevc.patch
 # https://framagit.org/tytan652/ffmpeg-ndi-patch
 Patch3:         %{name}-ndi.patch
+# https://git.ffmpeg.org/gitweb/ffmpeg.git/commit/9212b53ed5b2f7346036936d500e7954190fb08b
+# https://git.ffmpeg.org/gitweb/ffmpeg.git/commit/1ebb0e43f9a15a12cd94db44e4bc5424f8a5b0c9
+Patch4:         %{name}-nvenc.patch
 
 BuildRequires:  AMF-devel
 BuildRequires:  bzip2-devel
@@ -610,6 +613,9 @@ rm -fr %{buildroot}%{_datadir}/%{name}/examples
 %{_libdir}/libswscale.so
 
 %changelog
+* Wed Mar 27 2024 Simone Caronni <negativo17@gmail.com> - 1:4.4.4-5
+- Add NVENC patch for latest API changes.
+
 * Tue Mar 26 2024 Simone Caronni <negativo17@gmail.com> - 1:4.4.4-4
 - NVCC + Glibc 2.38 on ARM is currently broken.
 - Disable glslang.
